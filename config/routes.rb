@@ -1,4 +1,7 @@
 WsMmWanted::Application.routes.draw do
+  resources :prizes
+
+
   resources :codes
 
 
