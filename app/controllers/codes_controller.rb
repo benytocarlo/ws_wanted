@@ -1,83 +1,49 @@
+#coding: utf-8
 class CodesController < ApplicationController
-  # GET /codes
-  # GET /codes.json
-  def index
-    @codes = Code.all
+  respond_to :json
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @codes }
+  def update_prize_with_winner 
+    if update_attributes_of_code params[:code].to_s, params[:facebook_id].to_s
+      update_attributes_of_prize params[:code].to_s, params[:facebook_id].to_s
+    else
+      try_again
     end
   end
 
-  # GET /codes/1
-  # GET /codes/1.json
-  def show
-    @code = Code.find(params[:id])
+private
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @code }
-    end
-  end
-
-  # GET /codes/new
-  # GET /codes/new.json
-  def new
-    @code = Code.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @code }
-    end
-  end
-
-  # GET /codes/1/edit
-  def edit
-    @code = Code.find(params[:id])
-  end
-
-  # POST /codes
-  # POST /codes.json
-  def create
-    @code = Code.new(params[:code])
-
-    respond_to do |format|
-      if @code.save
-        format.html { redirect_to @code, notice: 'Code was successfully created.' }
-        format.json { render json: @code, status: :created, location: @code }
+  def update_attributes_of_code number, facebook_id
+    @code = Code.find_by_number number
+    if !@code.nil? 
+      if @code.mark_off
+        return true
       else
-        format.html { render action: "new" }
-        format.json { render json: @code.errors, status: :unprocessable_entity }
+        return false
       end
+    else
+      return false
     end
   end
 
-  # PUT /codes/1
-  # PUT /codes/1.json
-  def update
-    @code = Code.find(params[:id])
-
-    respond_to do |format|
-      if @code.update_attributes(params[:code])
-        format.html { redirect_to @code, notice: 'Code was successfully updated.' }
-        format.json { head :no_content }
+  def update_attributes_of_prize number, facebook_id
+    @code = Code.find_by_number number
+    @prize = Prize.find_by_facebook_id("0")
+    if !@prize.nil?
+      if @prize.update_attributes(:facebook_id => facebook_id, :code_id => @code.id)
+        winner @prize.description
       else
-        format.html { render action: "edit" }
-        format.json { render json: @code.errors, status: :unprocessable_entity }
+        try_again
       end
+    else
+      try_again
     end
   end
 
-  # DELETE /codes/1
-  # DELETE /codes/1.json
-  def destroy
-    @code = Code.find(params[:id])
-    @code.destroy
+  def winner prize_description
+    respond_with ({:respuesta => prize_description, :codigo => 2}).to_json
+  end
 
-    respond_to do |format|
-      format.html { redirect_to codes_url }
-      format.json { head :no_content }
-    end
+  def try_again
+    respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
   end
 end
