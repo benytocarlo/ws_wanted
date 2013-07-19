@@ -13,6 +13,6 @@ class Prize < ActiveRecord::Base
   end
 
   def right_time_of_day
-    Time.now.hour >= 9 && Time.now.hour <= 18
+    Time.now.in_time_zone("Santiago").hour >= 9 && Time.now.in_time_zone("Santiago").hour <= 18
   end
 end
