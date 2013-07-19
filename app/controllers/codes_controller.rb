@@ -40,7 +40,12 @@ private
   end
 
   def winner prize_description
-    respond_with ({:respuesta => prize_description, :codigo => 2}).to_json
+    if prize_description == "4 entradas"
+      @codigo = 1
+    else
+      @codigo = 2
+    end
+    respond_with ({:respuesta => prize_description, :codigo => @codigo}).to_json
   end
 
   def try_again
