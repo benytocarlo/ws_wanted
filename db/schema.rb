@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723205241) do
+ActiveRecord::Schema.define(:version => 20130718221916) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -62,13 +62,5 @@ ActiveRecord::Schema.define(:version => 20130723205241) do
   end
 
   add_index "prizes", ["code_id"], :name => "index_prizes_on_code_id"
-
-  create_table "sonies", :force => true do |t|
-    t.string   "id_facebook"
-    t.integer  "intentos"
-    t.string   "amigos_share"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
 
 end
