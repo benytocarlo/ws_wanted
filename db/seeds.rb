@@ -94,7 +94,7 @@ while num < 120000 do
   Code.create(:number => "AA" + num.to_s, :status => 0)
   num += 1
 end
-=begin
+
 # Códigos AB
 num = 120001
 while num < 140000 do
@@ -149,6 +149,7 @@ while num < 300000 do
   Code.create!(:number => "AJ" + num.to_s, :status => 0)
   num =+ 1
 end
+=begin
 =end
 
 #end_time = Time.now
