@@ -14,6 +14,8 @@ while num < 120000 do
   num += 1
 end
 
+Code.create @codes
+
 =begin
 
 num = 120001
@@ -81,7 +83,7 @@ end
 
 
 
-Code.import @codes
+#Code.import @codes
 =begin
 =end
 
