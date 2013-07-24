@@ -88,12 +88,13 @@ end
 =end
 
 
-=begin
+
 num = 100001
 while num < 120000 do
   Code.create(:number => "AA" + num.to_s, :status => 0)
   num += 1
 end
+=begin
 # Códigos AB
 num = 120001
 while num < 140000 do
