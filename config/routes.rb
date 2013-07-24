@@ -5,7 +5,7 @@ WsMmWanted::Application.routes.draw do
   resources :prizes
   resources :codes
 
-  get "/facebook_id/:facebook_id/code/:code" => "codes#update_prize_with_winner" 
+  get "/facebook_id/:facebook_id/code/:code" => "codes#is_winner?" 
 
 
   # The priority is based upon order of creation:
