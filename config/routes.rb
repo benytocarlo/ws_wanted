@@ -1,4 +1,7 @@
 WsMmWanted::Application.routes.draw do
+  resources :sonies
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -6,6 +9,7 @@ WsMmWanted::Application.routes.draw do
   resources :codes
 
   get "/facebook_id/:facebook_id/code/:code" => "codes#update_prize_with_winner" 
+  get "/sony/facebook_id/:facebook_id/friends/:friends" => "sonies#update_participation" 
 
 
   # The priority is based upon order of creation:
