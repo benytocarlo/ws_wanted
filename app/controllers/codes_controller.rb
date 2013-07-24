@@ -20,25 +20,25 @@ class CodesController < ApplicationController
   def is_a_valid code
     letters = code[0..1]
     number = code[2..7].to_i
-    if    letters == "AA" && 100001 =< number && number < 120000 then
+    if    letters == "AA" && 100001 <= number && number < 120000 then
       return true
-    elsif letters == "AB" && 120001 =< number && number < 140000 then
+    elsif letters == "AB" && 120001 <= number && number < 140000 then
       return true
-    elsif letters == "AC" && 140001 =< number && number < 160000 then
+    elsif letters == "AC" && 140001 <= number && number < 160000 then
       return true
-    elsif letters == "AD" && 160001 =< number && number < 180000 then
+    elsif letters == "AD" && 160001 <= number && number < 180000 then
       return true
-    elsif letters == "AE" && 180001 =< number && number < 200000 then
+    elsif letters == "AE" && 180001 <= number && number < 200000 then
       return true
-    elsif letters == "AF" && 200001 =< number && number < 220000 then
+    elsif letters == "AF" && 200001 <= number && number < 220000 then
       return true
-    elsif letters == "AG" && 220001 =< number && number < 240000 then
+    elsif letters == "AG" && 220001 <= number && number < 240000 then
       return true
-    elsif letters == "AH" && 240001 =< number && number < 260000 then
+    elsif letters == "AH" && 240001 <= number && number < 260000 then
       return true
-    elsif letters == "AI" && 260001 =< number && number < 280000 then
+    elsif letters == "AI" && 260001 <= number && number < 280000 then
       return true
-    elsif letters == "AJ" && 280001 =< number && number < 300000 then
+    elsif letters == "AJ" && 280001 <= number && number < 300000 then
       return true
     else
       return false
