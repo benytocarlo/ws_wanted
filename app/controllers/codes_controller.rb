@@ -42,19 +42,8 @@ class CodesController < ApplicationController
       return true
     else
       return false
-  end
-  
-  
-  
-=begin
-  def update_prize_with_winner 
-    if update_attributes_of_code params[:code].to_s, params[:facebook_id].to_s
-      update_attributes_of_prize params[:code].to_s, params[:facebook_id].to_s
-    else
-      try_again
     end
   end
-=end
 
 private
 
