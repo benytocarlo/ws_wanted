@@ -99,55 +99,55 @@ end
 num = 120001
 while num < 140000 do
   Code.create(:number => "AB" + num.to_s, :status => 0)
-  num =+ 1
+  num += 1
 end
 # Códigos AC
 num = 140001
 while num < 160000 do
   Code.create!(:number => "AC" + num.to_s, :status => 0)
-  num =+ 1
+  num += 1
 end
 # Códigos AD
 num = 160001
 while num < 180000 do
   Code.create!(:number => "AD" + num.to_s, :status => 0)
-  num =+ 1 
+  num += 1 
 end
 # Códigos AE
 num = 180001
 while num < 200000 do
   Code.create!(:number => "AE" + num.to_s, :status => 0)
-  num =+ 1
+  num += 1
 end
 # Códigos AF
 num = 200001
 while num < 220000 do
   Code.create!(:number => "AF" + num.to_s, :status => 0)
-  num =+ 1 
+  num += 1 
 end
 # Códigos AG
 num = 220001
 while num < 240000 do
   Code.create!(:number => "AG" + num.to_s, :status => 0)
-  num =+ 1
+  num += 1
 end
 # Códigos AH
 num = 240001
 while num < 260000 do
   Code.create!(:number => "AH" + num.to_s, :status => 0)
-  num =+ 1
+  num += 1
 end
 # Códigos AI
 num = 260001
 while num < 280000 do
   Code.create!(:number => "AI" + num.to_s, :status => 0)
-  num =+ 1 
+  num += 1 
 end
 # Códigos AJ
 num = 280001
 while num < 300000 do
   Code.create!(:number => "AJ" + num.to_s, :status => 0)
-  num =+ 1
+  num += 1
 end
 =begin
 =end
