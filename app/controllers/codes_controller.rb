@@ -7,7 +7,7 @@ class CodesController < ApplicationController
   #
   def is_winnner? code, facebook_id
     if there_are_available_prizes and is_a_valid code then
-      update_prize_with_winner
+      update_attributes_of_prize code, facebook_id
     else # we don't have prizes to give..
       try_again
     end
