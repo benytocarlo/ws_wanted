@@ -14,6 +14,8 @@ while num < 120000 do
   num += 1
 end
 
+=begin
+
 num = 120001
 while num < 140000 do
   @codes << Code.new(:number => "AB" + num.to_s, :status => 0)
@@ -67,7 +69,7 @@ while num < 300000 do
   @codes << Code.new(:number => "AJ" + num.to_s, :status => 0)
   num += 1
 end
-
+=end
 
 
 
