@@ -6,15 +6,15 @@ Prize.create([
 #start = Time.now
 
 
-@codes = Array.new 
+#@codes = Array.new 
+#
+#num = 100001
+#while num < 120000 do
+#  @codes << Code.new(:number => "AA" + num.to_s, :status => 0)
+#  num += 1
+#end
 
-num = 100001
-while num < 120000 do
-  @codes << Code.new(:number => "AA" + num.to_s, :status => 0)
-  num += 1
-end
-
-Code.create @codes
+#Code.create @codes
 
 =begin
 
