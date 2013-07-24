@@ -3,7 +3,7 @@ Prize.create([
   {:description => "4 entradas", :facebook_id =>0}
 ])
 # Códigos AA
-start = Time.now
+#start = Time.now
 
 
 @codes = Array.new 
@@ -146,9 +146,9 @@ while num < 300000 do
 end
 =end
 
-end_time = Time.now
+#end_time = Time.now
 
-total = end_time - start
+#total = end_time - start
 
 
-print "El tiempo de ejecución fue de: #{total} segundos\n"
+#print "El tiempo de ejecución fue de: #{total} segundos\n"
