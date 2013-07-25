@@ -6,11 +6,11 @@ class CodesController < ApplicationController
   # con su Facebook ID en caso de haber ganado.
   #
   def is_winner?
-    #if there_are_available_prizes && is_a_valid(params[:code])
-    #  update_attributes_of_prize params[:code], params[:facebook_id]
-    #else # we don't have prizes to give..
-    respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
-    #end
+    if there_are_available_prizes && is_a_valid(params[:code])
+      update_attributes_of_prize params[:code], params[:facebook_id]
+    else # we don't have prizes to give..
+      respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
+    end
   end
   
 
