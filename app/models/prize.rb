@@ -1,6 +1,6 @@
 class Prize < ActiveRecord::Base
   belongs_to :code
-  attr_accessible :description, :facebook_id, :code_id
+  attr_accessible :description, :facebook_id, :code
 
   def self.add_new_prize_entradas
   	if we_have_prize_to_add && right_time_of_day

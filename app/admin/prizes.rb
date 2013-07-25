@@ -3,7 +3,7 @@ ActiveAdmin.register Prize do
     selectable_column
     column :description
     column :facebook_id
-    column :code_id
+    column :code
     default_actions                   
   end  
 

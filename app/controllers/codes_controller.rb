@@ -50,7 +50,7 @@ class CodesController < ApplicationController
   def update_attributes_of_prize number, facebook_id
     @prize = Prize.find_by_facebook_id("0")
     if !@prize.nil?
-      if @prize.update_attributes(:facebook_id => facebook_id, :code_id => number.to_i)
+      if @prize.update_attributes(:facebook_id => facebook_id, :code => number)
         winner @prize.description
       else
         try_again
