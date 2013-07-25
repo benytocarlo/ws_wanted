@@ -46,21 +46,12 @@ ActiveRecord::Schema.define(:version => 20130718221916) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "codes", :force => true do |t|
-    t.string   "number"
-    t.boolean  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "prizes", :force => true do |t|
     t.string   "description"
     t.string   "facebook_id"
-    t.integer  "code_id"
+    t.string   "code"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  add_index "prizes", ["code_id"], :name => "index_prizes_on_code_id"
 
 end
