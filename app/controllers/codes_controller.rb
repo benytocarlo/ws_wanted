@@ -13,7 +13,7 @@ class CodesController < ApplicationController
     end
   end
 
-private
+
 
   def there_are_available_prizes
     !Prize.find_by_facebook_id("0").nil?
@@ -43,7 +43,7 @@ private
     elsif letters == "AJ" && 280001 <= number && number < 300000 then
       return true
     else
-      try_again
+      false
     end
   end
 
@@ -68,7 +68,7 @@ private
     end
     respond_with ({:respuesta => prize_description, :codigo => @codigo}).to_json
   end
-
+private
   def try_again
     respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
   end
