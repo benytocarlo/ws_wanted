@@ -5,18 +5,21 @@ class CodesController < ApplicationController
   # Este método actualiza la columna del ganador
   # con su Facebook ID en caso de haber ganado.
   #
-  def is_winner
-    if there_are_available_prizes and is_a_valid code then
-      update_attributes_of_prize params[:code], params[:facebook_id]
-    else # we don't have prizes to give..
-      try_again
-    end
+  def is_winner?
+    #if there_are_available_prizes && is_a_valid(params[:code])
+    #  update_attributes_of_prize params[:code], params[:facebook_id]
+    #else # we don't have prizes to give..
+    respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
+    #end
   end
   
+
+private
+
   def there_are_available_prizes
-    !Prize.find_by_facebook_id(0).nil?
+    !Prize.find_by_facebook_id("0").nil?
   end
-  
+
   def is_a_valid code
     letters = code[0..1]
     number = code[2..7].to_i
@@ -41,11 +44,10 @@ class CodesController < ApplicationController
     elsif letters == "AJ" && 280001 <= number && number < 300000 then
       return true
     else
-      return false
+      try_again
     end
   end
 
-private
 
   def update_attributes_of_code number, facebook_id
     @code = Code.find_by_number number
