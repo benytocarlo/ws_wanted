@@ -12,7 +12,6 @@ class CodesController < ApplicationController
       respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
     end
   end
-  
 
 private
 
@@ -48,25 +47,10 @@ private
     end
   end
 
-
-  def update_attributes_of_code number, facebook_id
-    @code = Code.find_by_number number
-    if !@code.nil? 
-      if @code.mark_off
-        return true
-      else
-        return false
-      end
-    else
-      return false
-    end
-  end
-
   def update_attributes_of_prize number, facebook_id
-    @code = Code.find_by_number number
     @prize = Prize.find_by_facebook_id("0")
     if !@prize.nil?
-      if @prize.update_attributes(:facebook_id => facebook_id, :code_id => @code.id)
+      if @prize.update_attributes(:facebook_id => facebook_id, :code_id => number)
         winner @prize.description
       else
         try_again
