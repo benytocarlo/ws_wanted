@@ -5,9 +5,9 @@ class CodesController < ApplicationController
   # Este método actualiza la columna del ganador
   # con su Facebook ID en caso de haber ganado.
   #
-  def is_winnner? code, facebook_id
+  def is_winner
     if there_are_available_prizes and is_a_valid code then
-      update_attributes_of_prize code, facebook_id
+      update_attributes_of_prize params[:code], params[:facebook_id]
     else # we don't have prizes to give..
       try_again
     end
