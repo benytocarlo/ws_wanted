@@ -7,11 +7,11 @@ class Prize < ActiveRecord::Base
     end
   end
 
-  def we_have_prize_to_add
+  def self.we_have_prize_to_add
   	Prize.find(:all, :conditions =>["description = '4 entradas'"] ).count < 300
   end
 
-  def right_time_of_day
+  def self.right_time_of_day
     Time.now.in_time_zone("Santiago").hour >= 9 && Time.now.in_time_zone("Santiago").hour <= 18
   end
 end
