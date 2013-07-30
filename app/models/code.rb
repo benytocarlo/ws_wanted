@@ -1,5 +1,5 @@
 class Code < ActiveRecord::Base
-  validates_uniqueness_of :number
+  #validates_uniqueness_of :number
   attr_accessible :number, :status
 
   def mark_off
