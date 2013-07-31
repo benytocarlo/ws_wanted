@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Restaurando base de datos de Heroku..."
+heroku pg:reset DATABASE_URL
+echo "Migrando la base de datos..."
+heroku run:detached rake db:migrate
