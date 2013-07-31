@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Actualizando repositorio desde Github..."
+git pull origin master
+echo "Actualizando heroku..."
+git push heroku master
