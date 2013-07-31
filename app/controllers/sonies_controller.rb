@@ -7,6 +7,22 @@ class SoniesController < InheritedResources::Base
     end
   end
 
+  def create_winner
+    @sony_participant = Sony.find_by_facebook_id(params[:facebook_id])
+    @code = Code.find_by_description(params[:code])
+    if @code.is_valid && @sony_participant.has_tries_left then
+      add_winner_to_code(@code, @sony_participant) 
+      respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
+    else
+      return_loser(@code, @sony_participant)
+      respond_with ({:respuesta => "Loser", :intentos => @sony_participant.intentos}).to_json
+    end
+  end
+
+  def add_winner_to_code @code, @sony_participant
+    @code.update_attributes :facebook_uid => @sony_participant.facebook_id
+  end
+
   def update_participation
     @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
     if !@update_friends.nil?
