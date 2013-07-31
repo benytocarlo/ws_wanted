@@ -1,8 +1,9 @@
 class Sony < ActiveRecord::Base
   attr_accessible :amigos_share, :facebook_id, :intentos
+  validates_uniqueness_of :facebook_id
 
   def has_tries_left
-    if intento > 0 && intentos <= 3 then
+    if intentos > 0 && intentos <= 3 then
       return true
     else
       return false
