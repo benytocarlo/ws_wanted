@@ -1,5 +1,5 @@
 #coding: utf-8
-class SoniesController < InheritedResources::Base
+class SoniesController < ApplicationController
   respond_to :json
   def create_participation
   	if Sony.create :facebook_id => params[:facebook_id], :intentos => 3
@@ -10,17 +10,26 @@ class SoniesController < InheritedResources::Base
   def create_winner
     @sony_participant = Sony.find_by_facebook_id(params[:facebook_id])
     @code = Code.find_by_description(params[:code])
-    if @code.is_valid && @sony_participant.has_tries_left then
-      add_winner_to_code(@code, @sony_participant) 
-      respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
-    else
-      return_loser(@code, @sony_participant)
-      respond_with ({:respuesta => "Loser", :intentos => @sony_participant.intentos}).to_json
+
+    if @code.nil?
+      @code = Code.new :description => params[:code]
+    end
+
+    if @sony_participant.nil?
+      respond_with ({:respuesta => "Participant error"})
+    else  
+      @sony_participant.add_try
+      if @code.is_valid && @sony_participant.has_tries_left then
+        add_winner_to_code @code, @sony_participant
+        respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
+      else
+        respond_with ({:respuesta => "Loser", :intentos => @sony_participant.intentos}).to_json
+      end
     end
   end
 
-  def add_winner_to_code @code, @sony_participant
-    @code.update_attributes :facebook_uid => @sony_participant.facebook_id
+  def add_winner_to_code code, sony_participant
+    code.update_attributes :facebook_uid => sony_participant.facebook_id
   end
 
   def update_participation
