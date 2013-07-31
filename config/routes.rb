@@ -4,8 +4,12 @@ WsMmWanted::Application.routes.draw do
 
   resources :prizes
   resources :codes
+  resources :sonies
 
   get "/facebook_id/:facebook_id/code/:code" => "codes#is_winner?" 
+  get "sony/crear_participante/facebook_id/:facebook_id/" => "sonies#create_participation" 
+  get "sony/actualizar_participante/facebook_id/:facebook_id/amigos_share/:amigos_share/" => "sonies#update_participation" 
+  get "sony/intento/facebook_id/:facebook_id/" => "sonies#user_tries?" 
 
 
   # The priority is based upon order of creation:

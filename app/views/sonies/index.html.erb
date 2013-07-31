@@ -1,0 +1,27 @@
+<h1>Listing sonies</h1>
+
+<table>
+  <tr>
+    <th>Facebook</th>
+    <th>Intentos</th>
+    <th>Amigos share</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sonies.each do |sony| %>
+  <tr>
+    <td><%= sony.facebook_id %></td>
+    <td><%= sony.intentos %></td>
+    <td><%= sony.amigos_share %></td>
+    <td><%= link_to 'Show', sony %></td>
+    <td><%= link_to 'Edit', edit_sony_path(sony) %></td>
+    <td><%= link_to 'Destroy', sony, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sony', new_sony_path %>

@@ -1,0 +1,29 @@
+<%= form_for(@sony) do |f| %>
+  <% if @sony.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sony.errors.count, "error") %> prohibited this sony from being saved:</h2>
+
+      <ul>
+      <% @sony.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :facebook_id %><br />
+    <%= f.text_field :facebook_id %>
+  </div>
+  <div class="field">
+    <%= f.label :intentos %><br />
+    <%= f.number_field :intentos %>
+  </div>
+  <div class="field">
+    <%= f.label :amigos_share %><br />
+    <%= f.text_field :amigos_share %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
