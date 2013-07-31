@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(:version => 20130731154009) do
 
   create_table "prizes", :force => true do |t|
     t.string   "description"
-    t.string   "facebook_id"
+    t.string   "facebook_uid"
     t.string   "code"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "sonies", :force => true do |t|
