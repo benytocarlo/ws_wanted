@@ -53,7 +53,7 @@ class SoniesController < ApplicationController
   def update_participation
     @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
     if !@update_friends.nil?
-      if @update_friends.update_attributes(:amigos_share => @update_friends.amigos_share+"/"+params[:amigos_share])
+      if @update_friends.update_attributes(:intentos => 3 , :amigos_share => @update_friends.amigos_share+"/"+params[:amigos_share])
         respond_with ({:respuesta => "update_participation"}).to_json
       else
         respond_with ({:respuesta => "no update_participation"}).to_json
