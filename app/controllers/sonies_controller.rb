@@ -24,11 +24,12 @@ class SoniesController < ApplicationController
     if @sony_participant.nil?
       respond_with ({:respuesta => "Participant error"})
     else  
-      @sony_participant.add_try
       if @code.is_valid && @sony_participant.has_tries_left then
         add_winner_to_code @code, @sony_participant
+        @sony_participant.add_try
         respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
       else
+        @sony_participant.add_try
         respond_with ({:respuesta => "Loser", :intentos => @sony_participant.intentos}).to_json
       end
     end
