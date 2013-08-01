@@ -16,7 +16,7 @@ class SoniesController < ApplicationController
   
   def devuelve_participacion
     @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
-    if @premios = 0
+    if @premios == 0
       respond_with ({ :respuesta => "nojugar" })
     elsif @premios > 0
       respond_with ({ :respuesta => "jugar" })
