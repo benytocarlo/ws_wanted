@@ -7,6 +7,13 @@ class SoniesController < ApplicationController
     end
   end
 
+  # Devuelve los premios que no están tomados, activos o inactivos.
+  #
+  def devuelve_premios
+    @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
+    respond_with ({ :premios => @premios })
+  end
+
   def intentos
     @intentos = Sony.find_by_facebook_id(params[:facebook_id])
     @numero_de_intentos = @intentos.intentos
@@ -17,20 +24,24 @@ class SoniesController < ApplicationController
     @sony_participant = Sony.find_by_facebook_id(params[:facebook_id])
     @code = Code.find_by_description(params[:code])
 
-    if @code.nil?
-      @code = Code.new :description => params[:code]
-    end
+    if we_have_no_prizes_left then
+      respond_with ({:respuestsa => "No_Prizes_Left", :intentos => @sony_participation.intentos}).to_json
+    else#if we do have prizes left...
+      if @code.nil?
+        @code = Code.new :description => params[:code]
+      end
 
-    if @sony_participant.nil?
-      respond_with ({:respuesta => "Participant error"})
-    else  
-      if @code.is_valid && @sony_participant.has_tries_left then
-        add_winner_to_code @code, @sony_participant
-        @sony_participant.add_try
-        respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
-      else
-        @sony_participant.add_try
-        respond_with ({:respuesta => "Loser", :intentos => @sony_participant.intentos}).to_json
+      if @sony_participant.nil?
+        respond_with ({:respuesta => "Participant error"})
+      else  
+        if @code.is_valid && @sony_participant.has_tries_left then
+          add_winner_to_code @code, @sony_participant
+          @sony_participant.add_try
+          respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
+        else
+          @sony_participant.add_try
+          respond_with ({:respuesta => "Loser", :intentos => @sony_participant.intentos}).to_json
+        end
       end
     end
   end
@@ -65,4 +76,21 @@ class SoniesController < ApplicationController
 	  respond_with ({:respuesta => "encontrado", :intentos => @intentos.intentos}).to_json
     end
   end
+
+private
+
+  def we_have_no_prizes_left
+    @number_of_prizes_left = Code.find(:all, :conditions => ["activo = 't' AND facebook_uid is null"])
+    if !@number_of_prizes_left.nil?
+      @number_of_prizes_left = @number_of_prizes_left.count
+    else
+      @number_of_prizes_left = 0
+    end
+    if @number_of_prizes_left >= 0 then
+      return true
+    else
+      return false
+    end
+  end
+
 end

@@ -13,4 +13,5 @@ WsMmWanted::Application.routes.draw do
 
   get "/sony/create_winner/facebook_id/:facebook_id/code/:code" => "sonies#create_winner"
   get "/sony/intentos/:facebook_id" => "sonies#intentos"
+  get "/sony/premios" => "sonies#devuelve_premios"
 end
