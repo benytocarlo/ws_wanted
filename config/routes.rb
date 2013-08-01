@@ -8,7 +8,7 @@ WsMmWanted::Application.routes.draw do
 
   get "/facebook_id/:facebook_id/code/:code" => "codes#is_winner?" 
   get "sony/crear_participante/facebook_id/:facebook_id/" => "sonies#create_participation" 
-  get "sony/actualizar_participante/facebook_id/:facebook_id/amigos_share/:amigos_share/" => "sonies#update_participation" 
+  get "sony/actualizar_participante/facebook_id/:facebook_id/amigos_share/:amigos_share/count/:count" => "sonies#update_participation" 
   get "sony/intento/facebook_id/:facebook_id/" => "sonies#user_tries?" 
 
   get "/sony/create_winner/facebook_id/:facebook_id/code/:code" => "sonies#create_winner"
