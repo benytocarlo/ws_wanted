@@ -12,7 +12,8 @@ class CodesController < ApplicationController
       respond_with ({:respuesta => "Perdió", :codigo => 0}).to_json
     end
   end
-
+  
+  
 
 
   def there_are_available_prizes
