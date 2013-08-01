@@ -10,7 +10,7 @@ class SoniesController < ApplicationController
   # Devuelve los premios que no están tomados, activos o inactivos.
   #
   def devuelve_premios
-    @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
+    @premios = Code.all(:conditions => {:facebook_uid => ""}).count
     respond_with ({ :premios => @premios })
   end
 
