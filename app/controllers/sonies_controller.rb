@@ -25,7 +25,7 @@ class SoniesController < ApplicationController
     @code = Code.find_by_description(params[:code])
 
     if we_have_no_prizes_left then
-      respond_with ({:respuestsa => "No_Prizes_Left", :intentos => @sony_participation.intentos}).to_json
+      respond_with ({:respuesta => "No_Prizes_Left", :intentos => @sony_participant.intentos}).to_json
     else#if we do have prizes left...
       if @code.nil?
         @code = Code.new :description => params[:code]
