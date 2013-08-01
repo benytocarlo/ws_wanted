@@ -43,7 +43,7 @@ class SoniesController < ApplicationController
       if @sony_participant.nil?
         respond_with ({:respuesta => "Participant error"})
       else  
-        @valido = Code.find(:all, :conditions => ["description = ?", params[:code]]).count
+        @valido = Code.find(:all, :conditions => ["description = ? and activo = 't'", params[:code]]).count
         if @valido == 1 then
           add_winner_to_code @code, @sony_participant
           @sony_participant.add_try
