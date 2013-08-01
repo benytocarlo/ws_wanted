@@ -3,7 +3,7 @@ class CreateCodes < ActiveRecord::Migration
     create_table :codes do |t|
       t.string :description
       t.boolean :activo
-      t.string :facebook_id
+      t.string :facebook_uid
 
       t.timestamps
     end
