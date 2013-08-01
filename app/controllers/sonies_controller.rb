@@ -10,10 +10,19 @@ class SoniesController < ApplicationController
   # Devuelve los premios que no están tomados, activos o inactivos.
   #
   def devuelve_premios
-    @premios = Code.all(:conditions => {:facebook_uid => ""}).count
+    @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
     respond_with ({ :premios => @premios })
   end
-
+  
+  def devuelve_participacion
+    @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
+    if @premios = 0
+      respond_with ({ :respuesta => "nojugar" })
+    elsif @premios > 0
+      respond_with ({ :respuesta => "jugar" })
+    end
+  end
+  
   def intentos
     @intentos = Sony.find_by_facebook_id(params[:facebook_id])
     @numero_de_intentos = @intentos.intentos
