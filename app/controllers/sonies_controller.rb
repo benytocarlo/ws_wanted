@@ -25,7 +25,7 @@ class SoniesController < ApplicationController
     @code = Code.find_by_description(params[:code])
 
     if we_have_no_prizes_left then
-      respond_with ({:respuestsa => "No_Prizes_Left", :intentos => @sony_participation.intentos}).to_json
+      respond_with ({:respuesta => "No_Prizes_Left", :intentos => @sony_participant.intentos}).to_json
     else#if we do have prizes left...
       if @code.nil?
         @code = Code.new :description => params[:code]
@@ -53,7 +53,7 @@ class SoniesController < ApplicationController
   def update_participation
     @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
     if !@update_friends.nil?
-      if @update_friends.update_attributes(:amigos_share => params[:amigos_share])
+      if @update_friends.update_attributes(:amigos_share => @update_friends.amigos_share+"/"+params[:amigos_share])
         respond_with ({:respuesta => "update_participation"}).to_json
       else
         respond_with ({:respuesta => "no update_participation"}).to_json
