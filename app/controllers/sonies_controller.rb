@@ -86,10 +86,10 @@ private
     else
       @number_of_prizes_left = 0
     end
-    if @number_of_prizes_left >= 0 then
-      return true
-    else
+    if @number_of_prizes_left > 0 then
       return false
+    else
+      return true
     end
   end
 
