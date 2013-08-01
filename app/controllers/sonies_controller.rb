@@ -39,11 +39,12 @@ class SoniesController < ApplicationController
       if @code.nil?
         @code = Code.new :description => params[:code]
       end
-
+      
       if @sony_participant.nil?
         respond_with ({:respuesta => "Participant error"})
       else  
-        if @code.is_valid then
+        @valido = Code.find(:all, :conditions => ["code_description = ?", params[:code]]).count
+        if @valido == 1 then
           add_winner_to_code @code, @sony_participant
           @sony_participant.add_try
           respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
