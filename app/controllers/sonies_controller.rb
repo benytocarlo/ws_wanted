@@ -7,6 +7,12 @@ class SoniesController < ApplicationController
     end
   end
 
+  def intentos
+    @intentos = Sony.find_by_facebook_id(params[:facebook_id])
+    @numero_de_intentos = @intentos.intentos
+    respond_with ({ :numero_de_intentos => @numero_de_intentos })
+  end
+
   def create_winner
     @sony_participant = Sony.find_by_facebook_id(params[:facebook_id])
     @code = Code.find_by_description(params[:code])
