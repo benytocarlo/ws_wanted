@@ -80,16 +80,16 @@ class SoniesController < ApplicationController
 private
 
   def we_have_no_prizes_left
-    @number_of_prizes_left = Code.find(:all, :conditions => ["activo = 't' AND facebook_uid is null"])
+    @number_of_prizes_left = Code.find(:all, :conditions => ["activo = 't' AND facebook_uid = ''"])
     if !@number_of_prizes_left.nil?
       @number_of_prizes_left = @number_of_prizes_left.count
     else
       @number_of_prizes_left = 0
     end
-    if @number_of_prizes_left >= 0 then
-      return true
-    else
+    if @number_of_prizes_left > 0 then
       return false
+    else
+      return true
     end
   end
 
