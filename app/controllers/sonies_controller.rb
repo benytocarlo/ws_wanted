@@ -10,10 +10,19 @@ class SoniesController < ApplicationController
   # Devuelve los premios que no están tomados, activos o inactivos.
   #
   def devuelve_premios
-    @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
+    @premios = Code.all(:conditions => {:facebook_uid => ""}).count
     respond_with ({ :premios => @premios })
   end
-
+  
+  def devuelve_participacion
+    @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
+    if @premios == 0
+      respond_with ({ :respuesta => "nojugar" })
+    elsif @premios > 0
+      respond_with ({ :respuesta => "jugar" })
+    end
+  end
+  
   def intentos
     @intentos = Sony.find_by_facebook_id(params[:facebook_id])
     @numero_de_intentos = @intentos.intentos
@@ -25,7 +34,7 @@ class SoniesController < ApplicationController
     @code = Code.find_by_description(params[:code])
 
     if we_have_no_prizes_left then
-      respond_with ({:respuestsa => "No_Prizes_Left", :intentos => @sony_participation.intentos}).to_json
+      respond_with ({:respuesta => "No_Prizes_Left", :intentos => @sony_participant.intentos}).to_json
     else#if we do have prizes left...
       if @code.nil?
         @code = Code.new :description => params[:code]
@@ -36,7 +45,8 @@ class SoniesController < ApplicationController
       if @sony_participant.nil?
         respond_with ({:respuesta => "Participant error"})
       else  
-        if @code.is_valid && @sony_participant.has_tries_left then
+        @valido = Code.find(:all, :conditions => ["description = ? AND activo = 't' AND facebook_uid = ''", params[:code]]).count
+        if @valido == 1 &&  @sony_participant.intentos > 0 &&  @sony_participant.intentos <=3 then
           add_winner_to_code @code, @sony_participant
           @sony_participant.add_try
           respond_with ({:respuesta => "Winner", :intentos => @sony_participant.intentos}).to_json
@@ -47,19 +57,39 @@ class SoniesController < ApplicationController
       end
     end
   end
-
+  
+  def friends
+    @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
+    respond_with ({:amigos => @update_friends.amigos_share}).to_json
+  end
+  
   def add_winner_to_code code, sony_participant
     code.update_attributes :facebook_uid => sony_participant.facebook_id
   end
 
   def update_participation
+    if params[:count].to_i > 3
+      contador = 3
+    else
+      contador = params[:count].to_i
+    end
+    
     @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
     if !@update_friends.nil?
-      if @update_friends.update_attributes(:amigos_share => params[:amigos_share])
-        respond_with ({:respuesta => "update_participation"}).to_json
+      logger.info "DEBUG: Devuelve Amigos #{params[:amigos_share]}"
+      if !@update_friends.amigos_share.nil?
+        if @update_friends.update_attributes(:intentos => contador , :amigos_share => @update_friends.amigos_share+","+params[:amigos_share].to_s)
+          respond_with ({:respuesta => "update_participation"}).to_json
+        else
+          respond_with ({:respuesta => "no update_participation"}).to_json
+        end
       else
-        respond_with ({:respuesta => "no update_participation"}).to_json
-      end
+        if @update_friends.update_attributes(:intentos => contador , :amigos_share => params[:amigos_share].to_s)
+          respond_with ({:respuesta => "update_participation"}).to_json
+        else
+          respond_with ({:respuesta => "no update_participation"}).to_json
+        end
+      end  
     else
       respond_with ({:respuesta => "no update_participation"}).to_json
     end
@@ -82,16 +112,16 @@ class SoniesController < ApplicationController
 private
 
   def we_have_no_prizes_left
-    @number_of_prizes_left = Code.find(:all, :conditions => ["activo = 't' AND facebook_uid is null"])
+    @number_of_prizes_left = Code.find(:all, :conditions => ["activo = 't' AND facebook_uid = ''"])
     if !@number_of_prizes_left.nil?
       @number_of_prizes_left = @number_of_prizes_left.count
     else
       @number_of_prizes_left = 0
     end
-    if @number_of_prizes_left >= 0 then
-      return true
-    else
+    if @number_of_prizes_left > 0 then
       return false
+    else
+      return true
     end
   end
 
