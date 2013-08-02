@@ -4,7 +4,7 @@ class CreateSonies < ActiveRecord::Migration
       t.string :facebook_id
       t.integer :intentos
       t.text :amigos_share
-
+      t.text :detalle
       t.timestamps
     end
   end
