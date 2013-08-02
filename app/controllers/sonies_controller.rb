@@ -25,6 +25,11 @@ class SoniesController < ApplicationController
   
   def intentos
     @intentos = Sony.find_by_facebook_id(params[:facebook_id])
+
+    if @intentos.nil? then
+      @intentos = Sony.create(:facebook_id => params[:facebook_id], :intentos => 3)
+    end
+
     @numero_de_intentos = @intentos.intentos
     respond_with ({ :numero_de_intentos => @numero_de_intentos })
   end
