@@ -1,9 +1,9 @@
 class Prize < ActiveRecord::Base
-  attr_accessible :description, :facebook_id, :code
+  attr_accessible :description, :facebook_uid, :code
 
   def self.add_new_prize_entradas
   	if we_have_prize_to_add && right_time_of_day
-  	  Prize.create :description => "4 entradas", :facebook_id => '0'
+  	  Prize.create :description => "4 entradas", :facebook_uid => '0'
     end
   end
 
