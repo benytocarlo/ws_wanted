@@ -65,7 +65,14 @@ class SoniesController < ApplicationController
   
   def friends
     @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
-    respond_with ({:amigos => @update_friends.amigos_share}).to_json
+    
+    if @update_friends.amigos_share.nil?
+      @respuesta = 0.to_s
+    else
+      @respuesta = @update_friends.amigos_share
+    end
+
+    respond_with ({:amigos => @respuesta}).to_json
   end
   
   def add_winner_to_code code, sony_participant
