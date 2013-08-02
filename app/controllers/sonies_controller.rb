@@ -30,6 +30,8 @@ class SoniesController < ApplicationController
       if @code.nil?
         @code = Code.new :description => params[:code]
       end
+      
+      @sony_participant.add_code_to_detalle @code.description
 
       if @sony_participant.nil?
         respond_with ({:respuesta => "Participant error"})

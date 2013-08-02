@@ -1,5 +1,5 @@
 class Sony < ActiveRecord::Base
-  attr_accessible :amigos_share, :facebook_id, :intentos
+  attr_accessible :amigos_share, :facebook_id, :intentos, :detalle
   validates_uniqueness_of :facebook_id
 
   def has_tries_left
@@ -13,5 +13,9 @@ class Sony < ActiveRecord::Base
   def add_try
     @nuevo = self.intentos - 1
     update_attributes(:intentos => @nuevo )
+  end
+
+  def add_code_to_detalle code
+    self.detalle = self.detalle + "," + code.to_s
   end
 end
