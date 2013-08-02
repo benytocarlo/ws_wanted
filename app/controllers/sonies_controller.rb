@@ -61,10 +61,10 @@ class SoniesController < ApplicationController
   end
 
   def update_participation
-    if params[:count] > 3
+    if params[:count].to_i > 3
       contador = 3
     else
-      contador = params[:count]
+      contador = params[:count].to_i
     end
     
     @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
