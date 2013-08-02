@@ -16,6 +16,6 @@ class Sony < ActiveRecord::Base
   end
 
   def add_code_to_detalle code
-    self.detalle = self.detalle + "," + code.to_s
+    self.detalle = self.detalle.to_s + "," + code.to_s
   end
 end
