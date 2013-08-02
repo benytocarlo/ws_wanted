@@ -43,7 +43,7 @@ class SoniesController < ApplicationController
       if @sony_participant.nil?
         respond_with ({:respuesta => "Participant error"})
       else  
-        @valido = Code.find(:all, :conditions => ["description = ? AND activo = 't'", params[:code]]).count
+        @valido = Code.find(:all, :conditions => ["description = ? AND activo = 't' AND facebook_uid = ''", params[:code]]).count
         if @valido == 1 &&  @sony_participant.intentos > 0 &&  @sony_participant.intentos <=3 then
           add_winner_to_code @code, @sony_participant
           @sony_participant.add_try
@@ -55,7 +55,12 @@ class SoniesController < ApplicationController
       end
     end
   end
-
+  
+  def friends
+    @update_friends = Sony.find_by_facebook_id(params[:facebook_id])
+    respond_with ({:amigos => @update_friends.amigos_share}).to_json
+  end
+  
   def add_winner_to_code code, sony_participant
     code.update_attributes :facebook_uid => sony_participant.facebook_id
   end
