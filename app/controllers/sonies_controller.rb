@@ -14,6 +14,16 @@ class SoniesController < ApplicationController
     respond_with ({ :premios => @premios })
   end
   
+  def ganador
+    @ganador = Code.all(:conditions => {:facebook_uid => params[:facebook_id]}).count
+    if @ganador == 0
+      respond_with ({ :respuesta => "0" })
+    elsif @premios > 0
+      respond_with ({ :respuesta => "ganador" })
+    end
+    
+  end
+  
   def devuelve_participacion
     @premios = Code.all(:conditions => {:facebook_uid => "", :activo => true}).count
     if @premios == 0
