@@ -18,7 +18,7 @@ class SoniesController < ApplicationController
     @ganador = Code.all(:conditions => {:facebook_uid => params[:facebook_id]}).count
     if @ganador == 0
       respond_with ({ :respuesta => "0" })
-    elsif @premios > 0
+    elsif @ganador > 0
       respond_with ({ :respuesta => "ganador" })
     end
     
