@@ -10,7 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-
+#
 ActiveRecord::Schema.define(:version => 20130802133400) do
 
   create_table "active_admin_comments", :force => true do |t|

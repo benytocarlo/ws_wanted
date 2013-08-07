@@ -5,7 +5,7 @@ ActiveAdmin.register Sony do
     column :facebook_id
     column :intentos
     column :amigos_share
-    column :created_at
+    column :detalle
     column :updated_at
     default_actions                   
   end

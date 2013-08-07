@@ -2,7 +2,7 @@ ActiveAdmin.register Prize do
   index do                       
     selectable_column
     column :description
-    column :facebook_id
+    column :facebook_uid
     column :code
     default_actions                   
   end  
@@ -10,7 +10,7 @@ ActiveAdmin.register Prize do
   form do |f|                         
     f.inputs "Prize Details" do       
       f.input :description                  
-      f.input :facebook_id            
+      f.input :facebook_uid            
     end                               
     f.actions                         
   end

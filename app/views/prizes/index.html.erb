@@ -13,7 +13,7 @@
 <% @prizes.each do |prize| %>
   <tr>
     <td><%= prize.description %></td>
-    <td><%= prize.facebook_id %></td>
+    <td><%= prize.facebook_uid %></td>
     <td><%= prize.code %></td>
     <td><%= link_to 'Show', prize %></td>
     <td><%= link_to 'Edit', edit_prize_path(prize) %></td>

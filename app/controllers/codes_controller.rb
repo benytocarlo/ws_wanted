@@ -17,7 +17,7 @@ class CodesController < ApplicationController
 
 
   def there_are_available_prizes
-    !Prize.find_by_facebook_id("0").nil?
+    !Prize.find_by_facebook_uid("0").nil?
   end
 
   def is_a_valid code
@@ -49,9 +49,9 @@ class CodesController < ApplicationController
   end
 
   def update_attributes_of_prize code, facebook_id
-    @prize = Prize.find_by_facebook_id("0")
+    @prize = Prize.find_by_facebook_uid("0")
     if !@prize.nil?
-      if @prize.update_attributes(:facebook_id => facebook_id, :code => code.to_s)
+      if @prize.update_attributes(:facebook_uid => facebook_id, :code => code.to_s)
         winner @prize.description
       else
         try_again
