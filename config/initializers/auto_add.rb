@@ -1,3 +1,4 @@
+=begin
 Thread.new{
   while true
     begin
@@ -10,5 +11,5 @@ Thread.new{
     end
   end 
 }
-
+=end
 

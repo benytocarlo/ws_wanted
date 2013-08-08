@@ -8,7 +8,7 @@ class Prize < ActiveRecord::Base
   end
 
   def self.we_have_prize_to_add
-  	Prize.find(:all, :conditions =>["description = '4 entradas'"] ).count < 300
+  	Prize.find(:all, :conditions =>["description = '4 entradas'"] ).count < 76
   end
 
   def self.right_time_of_day
