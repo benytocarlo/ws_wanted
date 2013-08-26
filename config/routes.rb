@@ -18,4 +18,6 @@ WsMmWanted::Application.routes.draw do
   get "/sony/premios" => "sonies#devuelve_premios"
   get "/sony/participacion" => "sonies#devuelve_participacion"
   
+  get "/memefactory/idmeme/:idmeme/" => "memes#print_meme"
+  
 end
