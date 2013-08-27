@@ -23,4 +23,4 @@ class MemesController < ApplicationController
     ftp.storbinary("STOR " + session[:facebook_id] + "_image_crop.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
     
   end
-  endte
+end
