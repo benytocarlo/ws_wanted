@@ -21,5 +21,6 @@ class MemesController < ApplicationController
     ftp.login('heroku@miapp.cl', 'heroku')
     ftp.storbinary("STOR " + params[:idmeme] + "_image_crop.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
     
+    respond_with ({ :respuesta => "1" })
   end
 end
