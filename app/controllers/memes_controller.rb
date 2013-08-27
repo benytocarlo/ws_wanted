@@ -19,7 +19,7 @@ class MemesController < ApplicationController
     ftp = Net::FTP.new('190.196.67.254')
     ftp.passive = true
     ftp.login('heroku@miapp.cl', 'heroku')
-    ftp.storbinary("STOR " + session[:facebook_id] + "_image_crop.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
+    ftp.storbinary("STOR " + params[:idmeme] + "_image_crop.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
     
   end
 end
