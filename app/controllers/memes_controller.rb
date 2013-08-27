@@ -8,8 +8,7 @@ class MemesController < ApplicationController
   # Este método imprime una imagen y la guarda en el FTP de Memefactory
   def print_meme
     @dir_imagen = params[:facebook_id]
-    @dir_imagen = ""
-    direccion_imagen = 'http://appdigital.cl/test_jquery/edit_image/screenshot2.php?id_insert=2' + @dir_imagen + '_image.jpg'
+    direccion_imagen = 'http://appdigital.cl/test_jquery/edit_image/screenshot2.php?id_insert=' + @dir_imagen
     @originalimage = Magick::Image.read(direccion_imagen).first
     @originalimage.crop!(params[:x1].to_i, params[:y1].to_i, params[:w].to_i, params[:h].to_i)
     @originalimage.resize_to_fit!(810, 600)
