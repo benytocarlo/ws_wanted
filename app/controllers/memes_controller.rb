@@ -9,9 +9,12 @@ class MemesController < ApplicationController
   def print_meme
     @dir_imagen = params[:idmeme]
     direccion_imagen = 'http://appdigital.cl/test_jquery/edit_image/screenshot2.php?id_insert=' + @dir_imagen.to_s
-    @originalimage = Magick::Image.read(direccion_imagen).first
-    @originalimage.crop!(params[:x1].to_i, params[:y1].to_i, params[:w].to_i, params[:h].to_i)
-    @originalimage.resize_to_fit!(810, 600)
+    kit = IMGKit.new(direccion_imagen)
+    @originalimage = kit.to_img(:jpg)
+    //
+    @originalimage = Magick::Image.from_blob(@originalimage).first
+    @originalimage.crop!(0, 250, 810, 850)
+    #@originalimage.resize_to_fit!(810, 600)
     
     file = StringIO.open(@originalimage.to_blob)
     #file = @originalimage
