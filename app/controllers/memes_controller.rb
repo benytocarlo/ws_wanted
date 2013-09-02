@@ -19,9 +19,9 @@ class MemesController < ApplicationController
     file = StringIO.open(@originalimage.to_blob)
     #file = @originalimage
     #@originalimage.write(file)
-    ftp = Net::FTP.new('190.196.67.254')
+    ftp = Net::FTP.new('192.163.197.28')
     ftp.passive = true
-    ftp.login('heroku@miapp.cl', 'heroku')
+    ftp.login('unicayya', 'abc/123')
     ftp.storbinary("STOR " + "memefactory/" + params[:idmeme] + "_image.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
     ftp.quit
     respond_with ({ :respuesta => "1" })
