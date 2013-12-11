@@ -21,4 +21,7 @@ WsMmWanted::Application.routes.draw do
   get "/memefactory/idmeme/:idmeme/" => "memes#print_meme"
   get "/memefactorytemporal/idmeme/:idmeme/" => "memes#print_meme_temporal"
   
+  get "/memefactoryapp/idmeme/:idmeme/" => "memesapp#print_meme"
+  get "/memefactorytemporalapp/idmeme/:idmeme/" => "memesapp#print_meme_temporal"
+  
 end
