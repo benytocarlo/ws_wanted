@@ -5,7 +5,6 @@ gem 'newrelic_rpm'
 gem 'rails', '3.2.13'
 gem 'activeadmin', '0.6.0'
 gem 'activerecord-import', '>= 0.2.0'
-gem "rmagick", "~> 2.13.2"
 
 group :development do
   gem 'sqlite3'
