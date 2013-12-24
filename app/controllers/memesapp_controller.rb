@@ -21,7 +21,7 @@ class MemesController < ApplicationController
     ftp = Net::FTP.new('192.163.197.28')
     ftp.passive = true
     ftp.login('unicayya', 'abc/123')
-    ftp.storbinary("STOR " + "www/images/memetemp/" + params[:idmeme] + "_image.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
+    ftp.storbinary("STOR " + "www/images/memes/" + params[:idmeme] + "_image.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
     ftp.quit
     respond_with ({ :respuesta => "1" })
   end
@@ -41,7 +41,7 @@ class MemesController < ApplicationController
     ftp = Net::FTP.new('192.163.197.28')
     ftp.passive = true
     ftp.login('unicayya', 'abc/123')
-    ftp.storbinary("STOR " + "www/images/memetemp/temporales/" + params[:idmeme] + "_image.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
+    ftp.storbinary("STOR " + "www/images/memes/temporales/" + params[:idmeme] + "_image.jpg", StringIO.new(file.read), Net::FTP::DEFAULT_BLOCKSIZE)
     ftp.quit
     respond_with ({ :respuesta => "1" })
   end
